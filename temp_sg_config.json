@@ -26,9 +26,8 @@
       "sync":
         `
 	function(doc, oldDoc){
-
 	  if (oldDoc == null && doc.type == "contact") {
-	    // give user access to it's contact channel
+	    // give user access to it's contact channels
 	    access(doc.userId, "contact-" + doc.userId);
 	    // add doc to user's contact channel
 	    channel("contact-" + doc.userId);

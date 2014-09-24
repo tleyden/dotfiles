@@ -27,8 +27,6 @@
         `
 	function(doc, oldDoc){
 
-	  log("processing " + doc._id);
-
 	  if (oldDoc == null && doc.type == "contact") {
 	    // give user access to it's contact channel
 	    access(doc.userId, "contact-" + doc.userId);

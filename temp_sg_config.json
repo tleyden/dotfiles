@@ -26,13 +26,10 @@
       "sync":
         `
 	function(doc, oldDoc){
-
-	  log("processing " + doc._id);
-
 	  if (oldDoc == null && doc.type == "contact") {
-	    // give user access to it's contact channel
+	    // give user access to it's contact channelss
 	    access(doc.userId, "contact-" + doc.userId);
-	    // add doc to user's contact channel
+	    // add doc to user's contact channelss
 	    channel("contact-" + doc.userId);
 	  }
 

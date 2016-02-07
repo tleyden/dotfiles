@@ -13,17 +13,22 @@
 (require 'go-mode-load)
 
 ; Apparently needed so that the EmacsForOsx can find godoc binary
-(setenv "PATH" "/Users/tleyden/.rbenv/shims:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/go/bin")
+(setenv "PATH" "/Users/tleyden/.rbenv/shims:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/go/bin:/Users/tleyden/Development/gocode/bin")
 
 ; Needed so that EmacsForOsx godoc can find gocode
-(setenv "GOPATH" "/Users/tleyden/Development/gocode")
+(setenv "GOPATH" "/Users/tleyden/Development/sync_gateway:/Users/tleyden/Development/gocode")
+
+; Needed to get goforestdb to build
+; See https://github.com/couchbase/goforestdb/issues/14
+(setenv "C_INCLUDE_PATH" "/usr/local/include/")
+(setenv "LIBRARY_PATH" "/usr/local/lib")
 
 ; Needed so that EmacsForOsx can find gofmt
 (setq exec-path (cons "/usr/local/go/bin" exec-path))
 (add-to-list 'exec-path "/Users/tleyden/Development/gocode/bin")
 
 ; Go Oracle
-(load-file "$GOPATH/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")
+(load-file "/Users/tleyden/Development/gocode/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")
 
 (defun my-go-mode-hook ()
   ; Use goimports instead of go-fmt
@@ -33,7 +38,7 @@
   ; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
-           "go build -v && go test -v && go vet"))
+           "go generate && go build -v && go test -v && go vet"))
   ; Godef jump key binding
   (local-set-key (kbd "M-.") 'godef-jump))
   ; Go Oracle

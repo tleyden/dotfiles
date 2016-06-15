@@ -1,7 +1,4 @@
 
-; Not sure why this is no longer working under the my-go-mode-hook 
-(global-set-key (kbd "M-.") 'godef-jump)
-
 ; Color themes
 (add-to-list 'custom-theme-load-path "/Users/tleyden/.emacs.d/color-themes/")
 (load-theme 'taming-mr-arneson t)
@@ -41,7 +38,10 @@
       (set (make-local-variable 'compile-command)
            "go generate && go build -v && go test -v && go vet"))
   ; Go oracle
-  (load-file "$GOPATH/src/golang.org/x/tools/cmd/oracle/oracle.el"))
+  (load-file "$GOPATH/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")
+  ; Map Alt-. to call godef-jump
+  (local-set-key (kbd "M-.") 'godef-jump))
+
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
 ; Auto-complete for go-mode
